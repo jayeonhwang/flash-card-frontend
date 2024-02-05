@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 
 
 export function BundleIndex() {
@@ -21,9 +22,10 @@ export function BundleIndex() {
       {bundles.map(bundle => (
         <div key={bundle.id}>
           <p>{bundle.title}</p>
+          <Link to={`/bundles/${bundle.id}`}>{bundle.title}</Link>
         </div>
       ))
       }
-    </div>
+    </div >
   )
 }

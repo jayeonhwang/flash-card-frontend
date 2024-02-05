@@ -1,10 +1,13 @@
 import axios from "axios";
 import { BundleIndex } from "./BundleIndex";
+import { Routes, Route } from "react-router-dom";
+import { CardList } from "./CardList";
 
 export function Content() {
   return (
-    <main>
-      <BundleIndex />
-    </main>
+    <Routes>
+      <Route exact path="/" element={<BundleIndex />} />
+      <Route path="/bundles/:id" element={<CardList />} />
+    </Routes>
   )
 }
