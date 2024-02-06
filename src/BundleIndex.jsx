@@ -21,7 +21,6 @@ export function BundleIndex() {
       <h1>Bundles</h1>
       {bundles.map(bundle => (
         <div key={bundle.id}>
-          <p>{bundle.title}</p>
           <Link to={`/bundles/${bundle.id}`}>{bundle.title}</Link>
         </div>
       ))

@@ -1,5 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
+import { useSpring, a } from '@react-spring/web'
+import styles from './CardList.module.css'
 import axios from "axios";
 
 export function CardList() {
@@ -41,21 +43,53 @@ export function CardList() {
     }
   };
 
+  // flip card
+
+  const [flipped, set] = useState(false)
+
+  const { transform, opacity } = useSpring({
+    opacity: flipped ? 1 : 0,
+    transform: `perspective(600px) rotateX(${flipped ? 180 : 0}deg)`,
+    config: { mass: 5, tension: 500, friction: 80 },
+  })
 
   return (
-    <div>
-      <p>Card list</p>
+    <div className="cardContainer">
+
       <h1>{cardLists.title}</h1>
+
       {cardLists.cards && currentCard.map(card => (
-        <div className="card" key={card.id}>
-          <img src={card.image} width="200" />
-          <p>{card.word}</p>
-          <p>{card.description}</p>
+        <div key={card.id} className={styles.container} onClick={() => set(state => !state)}>
+          {/* front side */}
+          <a.div
+            className={`${styles.c} ${styles.back}`}
+            style={{ opacity: opacity.to(o => 1 - o), transform }}
+          >
+            {card.word && <p>{card.word}</p>}
+            {card.image && <img src={card.image} width="200" />}
+          </a.div>
+
+          {/* back side */}
+
+          <a.div
+            className={`${styles.c} ${styles.front}`}
+            style={{
+              opacity,
+              transform,
+              rotateX: '180deg',
+            }}
+          >
+            <p>{card.description}</p>
+          </a.div>
+
+
         </div>
 
       ))}
-      <button onClick={handlePreviousPage}>Previous</button>
-      <button onClick={handleNextPage}>Next</button>
+      <div className={styles.pagenation}>
+        <button onClick={handlePreviousPage}>Previous</button>
+        <button onClick={handleNextPage}>Next</button>
+      </div>
     </div>
   )
 }

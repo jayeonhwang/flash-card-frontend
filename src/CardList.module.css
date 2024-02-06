@@ -1,0 +1,36 @@
+.c {
+  position: absolute;
+  top: 250px;
+  max-width: 500px;
+  max-height: 500px;
+  width: 350px;
+  height: 200px;
+  cursor: pointer;
+  will-change: transform, opacity;
+}
+
+.front,
+.back {
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.back {
+  background-image: url(https://img.freepik.com/free-photo/paper-texture_1194-5999.jpg?w=1800&t=st=1707246184~exp=1707246784~hmac=e054d0e5f6897383bda388e1a5adea678d184e67263547d4064c1a3506e84a2d);
+  color: black;
+}
+
+.front {
+  background-image: url(https://img.freepik.com/free-photo/paper-texture_1194-5999.jpg?w=1800&t=st=1707246184~exp=1707246784~hmac=e054d0e5f6897383bda388e1a5adea678d184e67263547d4064c1a3506e84a2d);
+  color: black;
+}
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  /* Add gap between buttons */
+}
