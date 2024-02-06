@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import { BundleNew } from "./BundleNew";
 
 
 export function BundleIndex() {
@@ -14,11 +15,13 @@ export function BundleIndex() {
     })
   }
 
+
+
   useEffect(getBundles, []);
 
   return (
     <div>
-      <h1>Bundles</h1>
+      <h1>All Bundles</h1>
       {bundles.map(bundle => (
         <div key={bundle.id}>
           <Link to={`/bundles/${bundle.id}`}>{bundle.title}</Link>
