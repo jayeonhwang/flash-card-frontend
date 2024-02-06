@@ -24,12 +24,12 @@ export function BundleEdit() {
       <h2>{cardLists.title}</h2>
       {cardLists.cards && cardLists.cards.map(card => (
         <div key={card.id}>
-          <p>{card.word}</p>
-          <img src={card.image} width="200" />
-          <P>{card.description}</P>
+          {card.word && <p> <b>Q:</b>{card.word}</p>}
+          {card.image && <img src={card.image} width="200" />}
+          <b>A:</b>{card.description}
+          <hr />
         </div>
       ))}
-
     </div>
   )
 }
