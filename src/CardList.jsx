@@ -54,39 +54,23 @@ export function CardList() {
   })
 
   return (
-    <div className="cardContainer">
-
+    <div className="main-content">
       <h1>{cardLists.title}</h1>
 
       {cardLists.cards && currentCard.map(card => (
         <div key={card.id} className={styles.container} onClick={() => set(state => !state)}>
-          {/* front side */}
-          <a.div
-            className={`${styles.c} ${styles.back}`}
-            style={{ opacity: opacity.to(o => 1 - o), transform }}
-          >
+          <a.div className={`${styles.c} ${styles.back}`} style={{ opacity: opacity.to(o => 1 - o), transform }}>
             {card.word && <p>{card.word}</p>}
-            {card.image && <img src={card.image} width="200" />}
+            {card.image && <img src={card.image} width="200" alt={card.word} />}
           </a.div>
 
-          {/* back side */}
-
-          <a.div
-            className={`${styles.c} ${styles.front}`}
-            style={{
-              opacity,
-              transform,
-              rotateX: '180deg',
-            }}
-          >
+          <a.div className={`${styles.c} ${styles.front}`} style={{ opacity, transform, rotateX: '180deg' }}>
             <p>{card.description}</p>
           </a.div>
-
-
         </div>
-
       ))}
-      <div className={styles.pagenation}>
+
+      <div className={styles.pagination}>
         <button onClick={handlePreviousPage}>Previous</button>
         <button onClick={handleNextPage}>Next</button>
       </div>

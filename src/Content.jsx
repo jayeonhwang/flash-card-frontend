@@ -11,7 +11,7 @@ import { BundleEdit } from "./BundleEdit";
 
 export function Content() {
   return (
-    <div>
+    <main>
       <Routes>
         <Route exact path="/" element={<BundleIndex />} />
         <Route path="/bundles/:id" element={<CardList />} />
@@ -20,7 +20,7 @@ export function Content() {
         <Route path="/my" element={<UpdatePage />} />
         <Route path="/mybundles/:id" element={<BundleEdit />} />
       </Routes>
-    </div>
+    </main>
 
   )
 }
