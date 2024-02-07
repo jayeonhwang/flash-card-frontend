@@ -23,6 +23,7 @@ export function BundleEdit() {
     axios.post("http://localhost:3000/cards.json", params).then(response => {
       setCards([...cards, response.data]);
       successCallback();
+      getCardList();
     });
   };
 
@@ -31,6 +32,13 @@ export function BundleEdit() {
     const params = new FormData(event.target);
     createCard(params, () => event.target.reset());
   };
+
+  const destroyCard = (card) => {
+    axios.delete(`http://localhost:3000/cards/${card.id}.json`).then(response => {
+      setCards(cards.filter((c) => c.id !== card.id))
+      getCardList();
+    })
+  }
 
 
   return (
@@ -47,8 +55,9 @@ export function BundleEdit() {
       {cardLists.cards && cardLists.cards.map(card => (
         <div key={card.id}>
           {card.word && <p> <b>Q:</b>{card.word}</p>}
-          {card.image && <img src={card.image} width="200" />}
+          {card.image && <p><img src={card.image} width="200" /></p>}
           <b>A:</b>{card.description}
+          <button onClick={() => destroyCard(card)}>Delete</button>
           <hr />
         </div>
       ))}
