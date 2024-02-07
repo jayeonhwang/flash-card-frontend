@@ -22,6 +22,8 @@ export function BundleEdit() {
   return (
     <div>
       <h2>{cardLists.title}</h2>
+
+      <button>New</button>
       {cardLists.cards && cardLists.cards.map(card => (
         <div key={card.id}>
           {card.word && <p> <b>Q:</b>{card.word}</p>}

@@ -23,6 +23,13 @@ export function UpdatePage() {
     })
   }
 
+  const handleDestroyBundle = (bundle) => {
+    console.log("handleDestroyBundle", bundle);
+    axios.delete(`http://localhost:3000/bundles/${bundle.id}.json`).then(response => {
+      setBundles(bundles.filter((b) => b.id !== bundle.id))
+    })
+  }
+
   useEffect(getBundles, []);
 
   return (
@@ -32,6 +39,8 @@ export function UpdatePage() {
         {bundles.map(bundle => (
           <li key={bundle.id}>
             <Link to={`/mybundles/${bundle.id}`}>{bundle.title}</Link>
+            <p> <button onClick={() => handleDestroyBundle(bundle)}>Delete</button> </p>
+            <hr />
           </li>
         ))
         }
