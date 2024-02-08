@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { BundleNew } from "./BundleNew";
 
 
-export function UpdatePage() {
+export function MyPage() {
 
   const [bundles, setBundles] = useState([]);
 

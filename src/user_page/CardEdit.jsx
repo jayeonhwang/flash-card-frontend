@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 
-export function BundleEdit() {
+export function CardEdit() {
 
   const { id } = useParams();
   console.log(id)

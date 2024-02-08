@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { useSpring, a } from '@react-spring/web'
-import styles from './CardList.module.css'
+import styles from './FlashCard.module.css'
 import axios from "axios";
 
 export function CardList() {
@@ -61,7 +61,7 @@ export function CardList() {
         <div key={card.id} className={styles.container} onClick={() => set(state => !state)}>
           <a.div className={`${styles.c} ${styles.back}`} style={{ opacity: opacity.to(o => 1 - o), transform }}>
             {card.word && <p>{card.word}</p>}
-            {card.image && <img src={card.image} width="200" alt={card.word} />}
+            {card.image && <img src={card.image} width="200" />}
           </a.div>
 
           <a.div className={`${styles.c} ${styles.front}`} style={{ opacity, transform, rotateX: '180deg' }}>
