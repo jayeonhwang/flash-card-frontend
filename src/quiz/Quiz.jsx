@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import axios from "axios";
-
+import styles from './Quiz.module.css'
 export function Quiz() {
   const { id } = useParams();
 
@@ -41,46 +41,47 @@ export function Quiz() {
 
   // check answer
 
-  const [correctAnswer, setCorrectAnswer] = useState("")
-  const [userAnswer, setUserAnswer] = useState()
-  const [message, setMessage] = useState([])
+  const [userAnswer, setUserAnswer] = useState("");
+  const [message, setMessage] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState("");
 
   const checkAnswer = () => {
     if (userAnswer === correctAnswer) {
-      setMessage("Correct!")
+      setMessage("Correct!");
     } else {
-      setMessage("Nope")
+      setMessage("Nope");
     }
-  }
+  };
 
   const handleCardChange = (card) => {
     setUserAnswer("");
-    setCorrectAnswer(card.description);
+    setCorrectAnswer(card.answer);
+    console.log(correctAnswer)
   };
 
 
   return (
-    <div>
+    <main>
       <p>Quiz page</p>
 
-      {questions.cards && currentItem.map(card =>
-        <div key={card.id} onClick={() => handleCardChange(card)}>
-          {card.word && <p>{card.word}</p>}
-          {card.image && <img src={card.image} width="200" />}
-        </div>
-      )}
-
+      <div>
+        {questions.cards && currentItem.map(card =>
+          <div className={styles.testCard} key={card.id} onClick={() => handleCardChange(card)}>
+            {card.question && <p>{card.question}</p>}
+            {card.image && <img src={card.image} width="200" />}
+          </div>
+        )}
+      </div>
       <div>
         <button onClick={handlePreviousPage}>Previous</button>
         <button onClick={handleNextPage}>Next</button>
       </div>
-
       <div>
         <input type="text" value={userAnswer} onChange={event => setUserAnswer(event.target.value)} />
         <button onClick={checkAnswer}>Enter</button>
         <div>{message}</div>
       </div>
+    </main>
 
-    </div>
   )
 }

@@ -60,12 +60,12 @@ export function CardList() {
       {cardLists.cards && currentCard.map(card => (
         <div key={card.id} className={styles.container} onClick={() => set(state => !state)}>
           <a.div className={`${styles.c} ${styles.back}`} style={{ opacity: opacity.to(o => 1 - o), transform }}>
-            {card.word && <p>{card.word}</p>}
+            {card.question && <p>{card.question}</p>}
             {card.image && <img src={card.image} width="200" />}
           </a.div>
 
           <a.div className={`${styles.c} ${styles.front}`} style={{ opacity, transform, rotateX: '180deg' }}>
-            <p>{card.description}</p>
+            <p>{card.answer}</p>
           </a.div>
         </div>
       ))}

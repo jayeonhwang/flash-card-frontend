@@ -47,16 +47,16 @@ export function CardEdit() {
       <form className="Create Card" onSubmit={handleSubmit}>
         <input type="hidden" name="bundle_id" value={cardLists.id} />
         <p><b>image:</b><input name="image" type="text" /></p>
-        <p><b>Q:</b><input name="word" type="text" /></p>
-        <p><b>A:</b><input name="description" type="text" /></p>
+        <p><b>Q:</b><input name="question" type="text" /></p>
+        <p><b>A:</b><input name="answer" type="text" /></p>
         <button type="submit">New</button>
       </form>
 
       {cardLists.cards && cardLists.cards.map(card => (
         <div key={card.id}>
-          {card.word && <p> <b>Q:</b>{card.word}</p>}
+          {card.question && <p> <b>Q:</b>{card.question}</p>}
           {card.image && <p><img src={card.image} width="200" /></p>}
-          <b>A:</b>{card.description}
+          <b>A:</b>{card.answer}
           <button onClick={() => destroyCard(card)}>Delete</button>
           <hr />
         </div>
