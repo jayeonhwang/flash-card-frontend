@@ -1,87 +1,73 @@
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import styles from './Quiz.module.css'
+import styles from './Quiz.module.css';
+
 export function Quiz() {
   const { id } = useParams();
 
-  const [questions, setQuestions] = useState([])
+  const [questions, setQuestions] = useState([]);
+  const [activeQuestion, setActiveQuestion] = useState(0);
+  const [userAnswer, setUserAnswer] = useState("");
+  const [message, setMessage] = useState("");
 
-  const getQuestions = () => {
-    axios.get(`http://localhost:3000/bundles/${id}.json`).then(response => {
-      setQuestions(response.data)
-    })
-  }
 
-  useEffect(getQuestions, [id]);
+  useEffect(() => {
+    axios.get(`http://localhost:3000/bundles/${id}.json`)
+      .then(response => {
+        console.log(response.data);
+        setQuestions(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching questions:', error);
+      });
+  }, [id]);
 
-  //One question per page
-
-  const [currentPage, setCurrentPage] = useState(1)
-  const cardPerPage = 1;
-
-  const startIndex = (currentPage - 1) * cardPerPage
-  const endIndex = startIndex + cardPerPage
-  const currentItem = Array.isArray(questions.cards) ? questions.cards.slice(startIndex, endIndex) : [];
-
-  const handlePreviousPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1)
-    }
-    console.log('currentPage:', currentPage)
-  }
-
-  const handleNextPage = () => {
-    const totalPages = Math.ceil(questions.cards.length / cardPerPage);
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-      console.log('currentPage:', currentPage);
+  const handleNextQuestion = () => {
+    if (activeQuestion < questions.cards.length - 1) {
+      setActiveQuestion(prevQuestion => prevQuestion + 1);
+      setUserAnswer("");
+      setMessage("");
+    } else {
+      // Optionally, handle end of quiz
+      console.log("End of quiz");
     }
   };
 
-  // check answer
-
-  const [userAnswer, setUserAnswer] = useState("");
-  const [message, setMessage] = useState("");
-  const [correctAnswer, setCorrectAnswer] = useState("");
-
-  const checkAnswer = () => {
-    if (userAnswer === correctAnswer) {
+  const handleNextQuestionAndCheck = () => {
+    if (userAnswer.trim().toLowerCase() === questions.cards[activeQuestion].answer.trim().toLowerCase()) {
       setMessage("Correct!");
     } else {
       setMessage("Nope");
     }
+    setTimeout(() => {
+      handleNextQuestion();
+    }, 1000)
   };
 
-  const handleCardChange = (card) => {
-    setUserAnswer("");
-    setCorrectAnswer(card.answer);
-    console.log(correctAnswer)
-  };
+
+
+  if (!questions || questions.length === 0) {
+    return <div>Loading...</div>;
+  }
+
+  const { cards } = questions;
+  const { question, image, answer } = cards[activeQuestion];
+
 
 
   return (
     <main>
       <p>Quiz page</p>
-
+      <h2>{question}</h2>
+      {question && <p>{question}</p>}
+      {image && <p><img src={image} width="200" /></p>}
+      <p>{answer}</p>
+      <input type="text" value={userAnswer} onChange={(event) => setUserAnswer(event.target.value)} />
+      <div>{message}</div>
       <div>
-        {questions.cards && currentItem.map(card =>
-          <div className={styles.testCard} key={card.id} onClick={() => handleCardChange(card)}>
-            {card.question && <p>{card.question}</p>}
-            {card.image && <img src={card.image} width="200" />}
-          </div>
-        )}
-      </div>
-      <div>
-        <button onClick={handlePreviousPage}>Previous</button>
-        <button onClick={handleNextPage}>Next</button>
-      </div>
-      <div>
-        <input type="text" value={userAnswer} onChange={event => setUserAnswer(event.target.value)} />
-        <button onClick={checkAnswer}>Enter</button>
-        <div>{message}</div>
+        <button onClick={handleNextQuestionAndCheck} disabled={activeQuestion === cards.length - 1}>Next</button>
       </div>
     </main>
-
-  )
+  );
 }
