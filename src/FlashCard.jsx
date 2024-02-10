@@ -7,7 +7,7 @@ import axios from "axios";
 export function CardList() {
 
   const { id } = useParams();
-  console.log(id)
+
 
   const [cardLists, setCardLists] = useState([])
 

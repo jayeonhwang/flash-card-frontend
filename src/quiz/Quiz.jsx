@@ -10,6 +10,8 @@ export function Quiz() {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [userAnswer, setUserAnswer] = useState("");
   const [message, setMessage] = useState("");
+  const [correctCount, setCorrectCount] = useState(0)
+  const [showResult, setShowResult] = useState(false)
 
 
   useEffect(() => {
@@ -29,14 +31,14 @@ export function Quiz() {
       setUserAnswer("");
       setMessage("");
     } else {
-      // Optionally, handle end of quiz
-      console.log("End of quiz");
+      setShowResult(true)
     }
   };
 
   const handleNextQuestionAndCheck = () => {
     if (userAnswer.trim().toLowerCase() === questions.cards[activeQuestion].answer.trim().toLowerCase()) {
       setMessage("Correct!");
+      setCorrectCount((prev) => prev + 1)
     } else {
       setMessage("Nope");
     }
@@ -57,17 +59,37 @@ export function Quiz() {
 
 
   return (
-    <main>
-      <p>Quiz page</p>
-      <h2>{question}</h2>
-      {question && <p>{question}</p>}
-      {image && <p><img src={image} width="200" /></p>}
-      <p>{answer}</p>
-      <input type="text" value={userAnswer} onChange={(event) => setUserAnswer(event.target.value)} />
-      <div>{message}</div>
-      <div>
-        <button onClick={handleNextQuestionAndCheck} disabled={activeQuestion === cards.length - 1}>Next</button>
-      </div>
-    </main>
-  );
+    <div>
+      {!showResult ? (
+        <div className="quiz-container">
+          <p>Quiz page</p>
+          {question && <h1>{question}</h1>}
+          {image && <p><img src={image} width="200" /></p>}
+          <p>{answer}</p>
+          <p>{correctCount}</p>
+          <input type="text" value={userAnswer} onChange={(event) => setUserAnswer(event.target.value)} />
+          <div>{message}</div>
+          <div>
+            <button onClick={handleNextQuestionAndCheck}>
+              {activeQuestion === cards.length - 1 ? 'Finish !' : 'Next'}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="result">
+          <h3>Result</h3>
+          <p>
+            Total Question: {question.length}
+          </p>
+          <p>
+            Correct Answers:<span> {correctCount}</span>
+          </p>
+
+        </div>
+
+      )}
+    </div>
+  )
 }
+
+
