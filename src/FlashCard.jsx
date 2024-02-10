@@ -77,6 +77,7 @@ export function CardList() {
       </div>
 
       <Link to={`/quiz/${cardLists.id}`}>TEST</Link>
+      <Link to={`/multiple/${cardLists.id}`}>Multiple Quiz</Link>
     </div>
   )
 }

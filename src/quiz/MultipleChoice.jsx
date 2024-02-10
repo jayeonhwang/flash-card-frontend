@@ -8,7 +8,7 @@ export function MultipleChoice() {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [choices, setChoices] = useState([]);
-  const [userAnswer, setUserAnswer] = useState(" ")
+  const [userAnswer, setUserAnswer] = useState("")
   const [message, setMessage] = useState("")
   const [correctCount, setCorrectCount] = useState(0)
 
@@ -32,7 +32,7 @@ export function MultipleChoice() {
   const handleNextQuestion = () => {
     if (activeQuestion < questions.cards.length - 1) {
       setActiveQuestion(prevQuestion => prevQuestion + 1);
-      setUserAnswer("");
+      setUserAnswer(" ");
       setMessage("")
     } else {
       setShowResult(true);
@@ -61,12 +61,15 @@ export function MultipleChoice() {
   }
 
   const handleNextandCheck = () => {
-    if (userAnswer === answer) {
+    const currentCard = questions.cards[activeQuestion];
+    const correctAnswer = currentCard.answer;
+
+    if (userAnswer === correctAnswer) {
       setMessage("Correct")
       setCorrectCount((prev) => prev + 1)
     } else {
       setMessage("Worng")
-      console.log('wrong')
+      console.log('Wrong')
     }
     setTimeout(() => {
       handleNextQuestion();
@@ -79,7 +82,7 @@ export function MultipleChoice() {
   }
 
   const { cards } = questions;
-  const { question, image, answer } = cards[activeQuestion];
+  const { question, image } = cards[activeQuestion];
   const percentage = (correctCount / cards.length) * 100;
 
 
@@ -92,7 +95,13 @@ export function MultipleChoice() {
         {image && <p><img src={image} width="200" alt="Question" /></p>}
         {choices.map((choice, index) => (
           <div key={index}>
-            <input type="radio" id={`option${index}`} name="choices" value={choice} onChange={(event) => setUserAnswer(event.target.value)} />
+            <input
+              key={activeQuestion}
+              type="radio"
+              id={`option${index}`}
+              name="choices" value={choice}
+              onChange={(event) => setUserAnswer(event.target.value)}
+            />
             <label htmlFor={`option${index}`}>{choice}</label>
           </div>
         ))}
