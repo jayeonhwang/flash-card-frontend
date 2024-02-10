@@ -91,8 +91,10 @@ export function MultipleChoice() {
       {!showResult ? (<div>
         <h1>Multiple Choice</h1>
         <p>{correctCount}/{cards.length}</p>
-        <h1>{question}</h1>
-        {image && <p><img src={image} width="200" alt="Question" /></p>}
+        <div className="card-board">
+          {question && <h2>{question}</h2>}
+          {image && <p><img src={image} width="200" alt="Question" /></p>}
+        </div>
         {choices.map((choice, index) => (
           <div key={index}>
             <input

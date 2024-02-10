@@ -61,11 +61,13 @@ export function Quiz() {
   return (
     <div>
       {!showResult ? (
-        <div className="quiz-container">
-          <p>Quiz page</p>
+        <div>
+          <h2>{questions.title}</h2>
           <p>{correctCount}/{cards.length}</p>
-          {question && <h1>{question}</h1>}
-          {image && <p><img src={image} width="200" /></p>}
+          <div className="card-board">
+            {question && <h2>{question}</h2>}
+            {image && <p><img src={image} width="200" /></p>}
+          </div>
           <input type="text" value={userAnswer} onChange={(event) => setUserAnswer(event.target.value)} />
           <div>{message}</div>
           <div>

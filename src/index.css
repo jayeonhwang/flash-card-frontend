@@ -1,3 +1,17 @@
 html {
   scroll-behavior: smooth;
 }
+
+.card-board {
+  width: 400px;
+  height: 250px;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://img.freepik.com/free-vector/blank-white-notepaper-design_53876-118304.jpg?w=740&t=st=1707322460~exp=1707323060~hmac=bb90cfddf770dd631190c0b44cc4ba23d127c36564fc98b03e9cc7b80206e0e9);
+  color: black;
+  font-weight: bold;
+  font-size: 2em;
+
+}

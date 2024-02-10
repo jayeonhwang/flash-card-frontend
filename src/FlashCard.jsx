@@ -76,8 +76,10 @@ export function CardList() {
         <button onClick={handleNextPage}>Next</button>
       </div>
 
-      <Link to={`/quiz/${cardLists.id}`}>TEST</Link>
-      <Link to={`/multiple/${cardLists.id}`}>Multiple Quiz</Link>
+      <p> <Link to={`/quiz/${cardLists.id}`}>TEST</Link></p>
+      <p>
+        <Link to={`/multiple/${cardLists.id}`}>Multiple Quiz</Link>
+      </p>
     </div>
   )
 }
