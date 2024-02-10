@@ -8,6 +8,9 @@ export function MultipleChoice() {
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [choices, setChoices] = useState([]);
+  const [userAnswer, setUserAnswer] = useState(" ")
+  const [message, setMessage] = useState("")
+  const [correctCount, setCorrectCount] = useState(0)
 
   useEffect(() => {
     axios.get(`http://localhost:3000/bundles/${id}.json`)
@@ -29,6 +32,8 @@ export function MultipleChoice() {
   const handleNextQuestion = () => {
     if (activeQuestion < questions.cards.length - 1) {
       setActiveQuestion(prevQuestion => prevQuestion + 1);
+      setUserAnswer("");
+      setMessage("")
     } else {
       setShowResult(true);
     }
@@ -55,27 +60,61 @@ export function MultipleChoice() {
     setChoices(options);
   }
 
+  const handleNextandCheck = () => {
+    if (userAnswer === answer) {
+      setMessage("Correct")
+      setCorrectCount((prev) => prev + 1)
+    } else {
+      setMessage("Worng")
+      console.log('wrong')
+    }
+    setTimeout(() => {
+      handleNextQuestion();
+    }, 1000)
+  }
+
+
   if (!questions || questions.length === 0 || !questions.cards || questions.cards.length === 0 || choices.length === 0) {
     return <div>Loading...</div>;
   }
 
   const { cards } = questions;
   const { question, image, answer } = cards[activeQuestion];
+  const percentage = (correctCount / cards.length) * 100;
+
 
   return (
     <div>
-      <h1>Multiple Choice</h1>
-      <h1>{question}</h1>
-      {image && <p><img src={image} width="200" alt="Question" /></p>}
-      {choices.map((choice, index) => (
-        <div key={index}>
-          <input type="radio" id={`option${index}`} name="choices" value={choice} />
-          <label htmlFor={`option${index}`}>{choice}</label>
+      {!showResult ? (<div>
+        <h1>Multiple Choice</h1>
+        <p>{correctCount}/{cards.length}</p>
+        <h1>{question}</h1>
+        {image && <p><img src={image} width="200" alt="Question" /></p>}
+        {choices.map((choice, index) => (
+          <div key={index}>
+            <input type="radio" id={`option${index}`} name="choices" value={choice} onChange={(event) => setUserAnswer(event.target.value)} />
+            <label htmlFor={`option${index}`}>{choice}</label>
+          </div>
+        ))}
+        {message}
+        <button onClick={handleNextandCheck}>
+          {activeQuestion === cards.length - 1 ? 'Finish!' : 'Next'}
+        </button>
+      </div>
+      ) : (
+        <div className="result">
+          <h3>Result</h3>
+          <p>
+            Total Question: {cards.length}
+          </p>
+          <p>
+            Correct Answers:<span> {correctCount}</span>
+          </p>
+          <p>Percentage: {percentage.toFixed(2)}%</p>
+
         </div>
-      ))}
-      <button onClick={handleNextQuestion}>
-        {activeQuestion === cards.length - 1 ? 'Finish!' : 'Next'}
-      </button>
+      )}
+
     </div>
   );
 }

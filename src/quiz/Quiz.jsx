@@ -40,7 +40,7 @@ export function Quiz() {
       setMessage("Correct!");
       setCorrectCount((prev) => prev + 1)
     } else {
-      setMessage("Nope");
+      setMessage("Nope!");
     }
     setTimeout(() => {
       handleNextQuestion();
