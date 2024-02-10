@@ -40,7 +40,6 @@ export function CardEdit() {
     })
   }
 
-
   return (
     <div>
       <h2>{cardLists.title}</h2>
