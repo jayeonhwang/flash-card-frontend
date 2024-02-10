@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
 import { useSpring, a } from '@react-spring/web'
+import { Link } from "react-router-dom";
 import styles from './FlashCard.module.css'
 import axios from "axios";
 
@@ -74,6 +75,8 @@ export function CardList() {
         <button onClick={handlePreviousPage}>Previous</button>
         <button onClick={handleNextPage}>Next</button>
       </div>
+
+      <Link to={`/quiz/${cardLists.id}`}>TEST</Link>
     </div>
   )
 }

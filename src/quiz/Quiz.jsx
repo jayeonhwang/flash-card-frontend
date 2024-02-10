@@ -55,7 +55,7 @@ export function Quiz() {
 
   const { cards } = questions;
   const { question, image, answer } = cards[activeQuestion];
-
+  const percentage = (correctCount / cards.length) * 100;
 
 
   return (
@@ -63,10 +63,9 @@ export function Quiz() {
       {!showResult ? (
         <div className="quiz-container">
           <p>Quiz page</p>
+          <p>{correctCount}/{cards.length}</p>
           {question && <h1>{question}</h1>}
           {image && <p><img src={image} width="200" /></p>}
-          <p>{answer}</p>
-          <p>{correctCount}</p>
           <input type="text" value={userAnswer} onChange={(event) => setUserAnswer(event.target.value)} />
           <div>{message}</div>
           <div>
@@ -79,11 +78,12 @@ export function Quiz() {
         <div className="result">
           <h3>Result</h3>
           <p>
-            Total Question: {question.length}
+            Total Question: {cards.length}
           </p>
           <p>
             Correct Answers:<span> {correctCount}</span>
           </p>
+          <p>Percentage: {percentage.toFixed(2)}%</p>
 
         </div>
 

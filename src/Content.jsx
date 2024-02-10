@@ -7,6 +7,7 @@ import { Login } from "./authentication/Login";
 import { MyPage } from "./user_page/MyPage";
 import { CardEdit } from "./user_page/CardEdit";
 import { Quiz } from "./Quiz/Quiz";
+import { MultipleChoice } from "./quiz/MultipleChoice";
 
 
 
@@ -21,7 +22,7 @@ export function Content() {
         <Route path="/my" element={<MyPage />} />
         <Route path="/mybundles/:id" element={<CardEdit />} />
         <Route path="/quiz/:id" element={<Quiz />} />
-
+        <Route path="/multiple/:id" element={<MultipleChoice />} />
       </Routes>
     </main>
 

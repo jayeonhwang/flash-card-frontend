@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-import { BundleNew } from "./user_page/BundleNew";
+
 
 
 export function BundleIndex() {
