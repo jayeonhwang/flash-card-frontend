@@ -13,20 +13,25 @@ export function BundleIndex() {
     })
   }
 
+
+
   useEffect(getBundles, []);
 
   return (
-    <div>
-      <h3>Search: <input type="text" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} /></h3>
-      {bundles
-        .filter(bundle => bundle.title.toLowerCase().includes(searchTerm.toLowerCase()) || bundle.user_name.toLowerCase().includes(searchTerm.toLowerCase()))
-        .map(filteredBundle => (
-          <div key={filteredBundle.id}>
-            <Link to={`/bundles/${filteredBundle.id}`}>{filteredBundle.title}</Link>
-            <p>{filteredBundle.user_name}</p>
-            <hr />
-          </div>
-        ))}
+    <div className="bundle-index">
+      <div className="search-bar">
+        <input type="text" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} placeholder="Search or user name" />
+      </div>
+      <div className="bundle-container">
+        {bundles
+          .filter(bundle => bundle.title.toLowerCase().includes(searchTerm.toLowerCase()) || bundle.user_name.toLowerCase().includes(searchTerm.toLowerCase()))
+          .map(filteredBundle => (
+            <div key={filteredBundle.id} className="bundle-link">
+              <Link className="bundle-name" to={`/bundles/${filteredBundle.id}`}>{filteredBundle.title}</Link>
+              <p>{filteredBundle.user_name}</p>
+            </div>
+          ))}
+      </div>
     </div>
 
   )

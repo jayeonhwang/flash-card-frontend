@@ -22,7 +22,7 @@ export function Header() {
     <header>
       <nav className="nav">
         <div className="home">
-          <span className="icon">&#128451;</span>
+          <span className="icon">&#x1F4D3;</span>
           <a href="/"> FlashCards</a>
         </div>
         <div className="logstatus">

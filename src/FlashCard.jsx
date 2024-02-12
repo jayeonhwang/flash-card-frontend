@@ -55,31 +55,35 @@ export function CardList() {
   })
 
   return (
-    <div className="main-content">
-      <h1>{cardLists.title}</h1>
-
-      {cardLists.cards && currentCard.map(card => (
-        <div key={card.id} className={styles.container} onClick={() => set(state => !state)}>
-          <a.div className={`${styles.c} ${styles.back}`} style={{ opacity: opacity.to(o => 1 - o), transform }}>
-            {card.question && <p>{card.question}</p>}
-            {card.image && <img src={card.image} width="200" />}
-          </a.div>
-
-          <a.div className={`${styles.c} ${styles.front}`} style={{ opacity, transform, rotateX: '180deg' }}>
-            <p>{card.answer}</p>
-          </a.div>
+    <div>
+      <div className="flash-card-box">
+        <div className="card-title">
+          <h1>{cardLists.title}</h1>
         </div>
-      ))}
+        <div className="flash-card">
+          <button className="next-buttons" onClick={handlePreviousPage}>{'<'}</button>
+          {cardLists.cards && currentCard.map(card => (
+            <div key={card.id} className={styles.container} onClick={() => set(state => !state)}>
+              <a.div className={`${styles.c} ${styles.back}`} style={{ opacity: opacity.to(o => 1 - o), transform }}>
+                {card.question && <p>{card.question}</p>}
+                {card.image && <img src={card.image} width="200" />}
+              </a.div>
 
-      <div className={styles.pagination}>
-        <button onClick={handlePreviousPage}>Previous</button>
-        <button onClick={handleNextPage}>Next</button>
+              <a.div className={`${styles.c} ${styles.front}`} style={{ opacity, transform, rotateX: '180deg' }}>
+                <p>{card.answer}</p>
+              </a.div>
+            </div>
+          ))}
+          <button className="next-buttons" onClick={handleNextPage}>{'>'}</button>
+        </div>
       </div>
-
-      <p> <Link to={`/quiz/${cardLists.id}`}>TEST</Link></p>
-      <p>
-        <Link to={`/multiple/${cardLists.id}`}>Multiple Quiz</Link>
-      </p>
+      <div className="quiz-box">
+        <h2>Quiz</h2>
+        <div className="quiz-button">
+          <Link className="objective" to={`/quiz/${cardLists.id}`}>Objective</Link>
+          <Link className="multiple" to={`/multiple/${cardLists.id}`}>Multiple</Link>
+        </div>
+      </div>
     </div>
   )
 }

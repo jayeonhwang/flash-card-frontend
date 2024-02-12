@@ -1,5 +1,7 @@
 .container {
   height: 30vh;
+  display: flex;
+  justify-content: center;
 }
 
 .c {
@@ -32,9 +34,4 @@
   color: black;
   font-weight: bold;
   font-size: 2em;
-}
-
-.pagination {
-  margin-top: 20px;
-
 }
