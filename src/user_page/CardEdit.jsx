@@ -1,14 +1,16 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react";
+import { Modal } from "./Modal"
 import axios from "axios";
 
 
 export function CardEdit() {
 
   const { id } = useParams();
-  console.log(id)
   const [cardLists, setCardLists] = useState([])
   const [cards, setCards] = useState([])
+  const [isCardShowVisible, setIsCardShowVisible] = useState(false)
+  const [currentCard, setCurrentCard] = useState({})
 
   const getCardList = () => {
     axios.get(`http://localhost:3000/bundles/${id}.json`).then(response => {
@@ -40,6 +42,39 @@ export function CardEdit() {
     })
   }
 
+  const handleShowCard = (card) => {
+    setIsCardShowVisible(true)
+    setCurrentCard(card)
+  }
+
+  const handleClose = () => {
+    setIsCardShowVisible(false)
+  }
+
+  const handleUpdateCard = (id, params, successCallback) => {
+    axios.patch(`http://localhost:3000/cards/${id}.json`, params).then(response => {
+      setCards(
+        cards.map(card => {
+          if (card.id === response.data.id) {
+            return response.data
+          } else {
+            return cards
+          }
+        })
+      )
+      successCallback()
+      handleClose()
+      getCardList()
+    }
+    )
+  }
+
+  const updateSubmit = (event, card) => {
+    event.preventDefault();
+    const params = new FormData(event.target)
+    handleUpdateCard(card.id, params, () => event.target.reset())
+  }
+
   return (
     <div>
       <h2>{cardLists.title}</h2>
@@ -56,7 +91,16 @@ export function CardEdit() {
           {card.question && <p> <b>Q:</b>{card.question}</p>}
           {card.image && <p><img src={card.image} width="200" /></p>}
           <b>A:</b>{card.answer}
-          <button onClick={() => destroyCard(card)}>Delete</button>
+          <Modal show={isCardShowVisible && currentCard.id === card.id} onClose={handleClose}>
+            <form onSubmit={(event) => updateSubmit(event, card)}>
+              <p>Q: <input defaultValue={card.question} name="question" type="text" /></p>
+              <p>url: <input defaultValue={card.image} name="image" type="text" /></p>
+              <p>A: <input defaultValue={card.answer} name="answer" type="text" /></p>
+              <button type="submit">Update</button>
+            </form>
+            <button onClick={() => destroyCard(card)}>Delete</button>
+          </Modal>
+          <button onClick={() => handleShowCard(card)}>Uptate</button>
           <hr />
         </div>
       ))}
