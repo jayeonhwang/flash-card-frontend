@@ -2,11 +2,9 @@ import axios from "axios";
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 
-
-
 export function BundleIndex() {
-
   const [bundles, setBundles] = useState([]);
+
 
   const getBundles = () => {
     axios.get("http://localhost:3000/bundles.json").then(response => {
@@ -14,6 +12,7 @@ export function BundleIndex() {
       setBundles(response.data)
     })
   }
+
 
 
   useEffect(getBundles, []);
@@ -24,6 +23,10 @@ export function BundleIndex() {
       {bundles.map(bundle => (
         <div key={bundle.id}>
           <Link to={`/bundles/${bundle.id}`}>{bundle.title}</Link>
+          <p>
+            {bundle.user_name}
+          </p>
+          <hr />
         </div>
       ))
       }
