@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 export function BundleIndex() {
   const [bundles, setBundles] = useState([]);
-
+  const [searchTerm, setSearchTerm] = useState("")
 
   const getBundles = () => {
     axios.get("http://localhost:3000/bundles.json").then(response => {
@@ -13,23 +13,22 @@ export function BundleIndex() {
     })
   }
 
-
-
   useEffect(getBundles, []);
 
   return (
     <div>
       <h1>All Bundles</h1>
-      {bundles.map(bundle => (
-        <div key={bundle.id}>
-          <Link to={`/bundles/${bundle.id}`}>{bundle.title}</Link>
-          <p>
-            {bundle.user_name}
-          </p>
-          <hr />
-        </div>
-      ))
-      }
-    </div >
+      <h3>Search: <input type="text" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} /></h3>
+      {bundles
+        .filter(bundle => bundle.title.toLowerCase().includes(searchTerm.toLowerCase()) || bundle.user_name.toLowerCase().includes(searchTerm.toLowerCase()))
+        .map(filteredBundle => (
+          <div key={filteredBundle.id}>
+            <Link to={`/bundles/${filteredBundle.id}`}>{filteredBundle.title}</Link>
+            <p>{filteredBundle.user_name}</p>
+            <hr />
+          </div>
+        ))}
+    </div>
+
   )
 }
