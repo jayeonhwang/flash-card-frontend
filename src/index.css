@@ -1,3 +1,7 @@
+body {
+  margin: 0;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -15,3 +19,37 @@ html {
   font-size: 2em;
 
 }
+
+header .nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1e8bc3;
+}
+
+header a {
+  text-decoration: none;
+  color: white
+}
+
+.home {
+  font-size: 1.5rem;
+}
+
+
+header .logstatus ul {
+  display: flex;
+  list-style: none;
+}
+
+.logstatus li {
+  padding: 8px 15px;
+}
+
+.home a:hover,
+.logstatus li:hover {
+  background-color: #89c4f4;
+  border-radius: 4px;
+}
+
+/* bundle index */

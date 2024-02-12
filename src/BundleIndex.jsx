@@ -17,7 +17,6 @@ export function BundleIndex() {
 
   return (
     <div>
-      <h1>All Bundles</h1>
       <h3>Search: <input type="text" value={searchTerm} onChange={(event) => setSearchTerm(event.target.value)} /></h3>
       {bundles
         .filter(bundle => bundle.title.toLowerCase().includes(searchTerm.toLowerCase()) || bundle.user_name.toLowerCase().includes(searchTerm.toLowerCase()))

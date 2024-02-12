@@ -5,21 +5,29 @@ export function Header() {
   let loggedInStatus;
   if (localStorage.jwt) {
     loggedInStatus = (
-      <>
-        <a href="/my">MY Page</a> | <LogoutLink />
-      </>
+      <ul>
+        <li><a href="/my">MY Page</a></li>
+        <li><LogoutLink /></li>
+      </ul>
     )
   } else {
     loggedInStatus = (
-      <>
-        <a href="/signup">Sign Up</a> | <a href="/login">Log In</a>
-      </>
+      <ul>
+        <li><a href="/signup">Sign Up</a></li>
+        <li><a href="/login">Log In</a></li>
+      </ul>
     )
   }
   return (
     <header>
-      <nav>
-        <a href="/">Home</a> |  {loggedInStatus}
+      <nav className="nav">
+        <div className="home">
+          <span className="icon">&#128451;</span>
+          <a href="/"> FlashCards</a>
+        </div>
+        <div className="logstatus">
+          {loggedInStatus}
+        </div>
       </nav>
     </header>
   )
