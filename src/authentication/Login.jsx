@@ -29,7 +29,7 @@ export function Login() {
   };
 
   return (
-    <div id="login">
+    <div id="login" className="signup-box">
       <h1>Login</h1>
       <ul>
         {errors.map((error) => (
@@ -43,7 +43,7 @@ export function Login() {
         <div>
           Password: <input name="password" type="password" />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" style={{ alignSelf: 'flex-start' }}>Login</button>
       </form>
     </div>
   );

@@ -6,11 +6,15 @@ import { BrowserRouter } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <Content />
-      <Footer />
-    </BrowserRouter>
+    <div className="body">
+      <BrowserRouter>
+        <Header />
+        <div className="wrapper">
+          <Content />
+        </div>
+        <Footer />
+      </BrowserRouter>
+    </div>
   )
 }
 export default App;

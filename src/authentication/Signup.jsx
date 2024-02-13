@@ -29,7 +29,7 @@ export function Signup() {
           <li key={error}>{error}</li>
         ))}
       </ul>
-      <form onSubmit={handleSubmit}>
+      <form className="signup-box" onSubmit={handleSubmit}>
         <div>
           Name: <input name="name" type="text" />
         </div>

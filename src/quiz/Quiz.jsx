@@ -61,20 +61,24 @@ export function Quiz() {
   return (
     <div>
       {!showResult ? (
-        <div>
+        <div className="quiz-page">
           <h2>{questions.title}</h2>
+          <div className="message-box">
+            <div className={message === "Correct!" ? "message correct" : "message wrong"} >{message}</div>
+          </div>
           <p>{correctCount}/{cards.length}</p>
           <div className="card-board">
             {question && <h2>{question}</h2>}
             {image && <p><img src={image} width="200" /></p>}
           </div>
-          <input type="text" value={userAnswer} onChange={(event) => setUserAnswer(event.target.value)} />
-          <div>{message}</div>
-          <div>
+          <div className="user-input-box">
+            <input type="text" value={userAnswer} onChange={(event) => setUserAnswer(event.target.value)} />
+
             <button onClick={handleNextQuestionAndCheck}>
               {activeQuestion === cards.length - 1 ? 'Finish !' : 'Next'}
             </button>
           </div>
+
         </div>
       ) : (
         <div className="result">

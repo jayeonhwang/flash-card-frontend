@@ -67,7 +67,7 @@ export function MyPage() {
   useEffect(getBundles, []);
 
   return (
-    <div>
+    <div className="my-page">
       <h2>My Bundles</h2>
       <ul>
         {bundles.map(bundle => (

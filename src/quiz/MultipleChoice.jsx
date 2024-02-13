@@ -65,11 +65,10 @@ export function MultipleChoice() {
     const correctAnswer = currentCard.answer;
 
     if (userAnswer === correctAnswer) {
-      setMessage("Correct")
+      setMessage("Correct!")
       setCorrectCount((prev) => prev + 1)
     } else {
-      setMessage("Worng")
-      console.log('Wrong')
+      setMessage("Wrong")
     }
     setTimeout(() => {
       handleNextQuestion();
@@ -88,30 +87,36 @@ export function MultipleChoice() {
 
   return (
     <div>
-      {!showResult ? (<div>
-        <h1>Multiple Choice</h1>
-        <p>{correctCount}/{cards.length}</p>
-        <div className="card-board">
-          {question && <h2>{question}</h2>}
-          {image && <p><img src={image} width="200" alt="Question" /></p>}
-        </div>
-        {choices.map((choice, index) => (
-          <div key={index}>
-            <input
-              key={activeQuestion}
-              type="radio"
-              id={`option${index}`}
-              name="choices" value={choice}
-              onChange={(event) => setUserAnswer(event.target.value)}
-            />
-            <label htmlFor={`option${index}`}>{choice}</label>
+      {!showResult ? (
+        <div className="quiz-page">
+          <div className="message-box">
+
+            <div className={message === "Correct!" ? "message correct" : "message wrong"} >{message}</div>
+
           </div>
-        ))}
-        {message}
-        <button onClick={handleNextandCheck}>
-          {activeQuestion === cards.length - 1 ? 'Finish!' : 'Next'}
-        </button>
-      </div>
+          <p>{correctCount}/{cards.length}</p>
+          <div className="card-board">
+            {question && <h2>{question}</h2>}
+            {image && <p><img src={image} width="200" alt="Question" /></p>}
+          </div>
+          <div className="options">
+            {choices.map((choice, index) => (
+              <div key={index}>
+                <input
+                  key={activeQuestion}
+                  type="radio"
+                  id={`option${index}`}
+                  name="choices" value={choice}
+                  onChange={(event) => setUserAnswer(event.target.value)}
+                />
+                <label htmlFor={`option${index}`}>{choice}</label>
+              </div>
+            ))}
+          </div>
+          <button onClick={handleNextandCheck} className="next-button">
+            {activeQuestion === cards.length - 1 ? 'Finish!' : 'Next'}
+          </button>
+        </div>
       ) : (
         <div className="result">
           <h3>Result</h3>
