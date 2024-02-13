@@ -69,26 +69,27 @@ export function MyPage() {
   return (
     <div className="my-page">
       <h2>My Bundles</h2>
+      <BundleNew onCreateBundle={handleCreateBundle} />
       <ul>
         {bundles.map(bundle => (
-          <li key={bundle.id}>
-            <Link to={`/mybundles/${bundle.id}`}>{bundle.title}</Link>
+          <li key={bundle.id} className="bundle-show">
+            <div className="bundle-info">
+              <Link to={`/mybundles/${bundle.id}`}>{bundle.title}</Link>
+              <Modal show={isBundleShowVisible && currentBundle.id === bundle.id} onClose={handleClose}>
+                <form onSubmit={(event) => handleSubmit(event, bundle)}>
+                  Change Title: <input defaultValue={bundle.title} name="title" type="text" />
+                  <button type="submit">Update Title</button>
+                </form>
+                <button onClick={() => handleDestroyBundle(bundle)}>Delete</button>
+              </Modal>
+            </div>
 
-            <p><button onClick={() => handleShowBundle(bundle)}>Update</button></p>
-
-            <Modal show={isBundleShowVisible && currentBundle.id === bundle.id} onClose={handleClose}>
-              <form onSubmit={(event) => handleSubmit(event, bundle)}>
-                Change Title: <input defaultValue={bundle.title} name="title" type="text" />
-                <button type="submit">Update Title</button>
-              </form>
-              <button onClick={() => handleDestroyBundle(bundle)}>Delete</button>
-            </Modal>
-            <hr />
+            <button onClick={() => handleShowBundle(bundle)}>Update</button>
           </li>
         ))
         }
       </ul>
-      <BundleNew onCreateBundle={handleCreateBundle} />
+
     </div >
   )
 }

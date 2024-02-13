@@ -76,33 +76,41 @@ export function CardEdit() {
   }
 
   return (
-    <div>
+    <div className="card-edit-box">
       <h2>{cardLists.title}</h2>
-      <form className="Create Card" onSubmit={handleSubmit}>
+
+      <form className="create-card" onSubmit={handleSubmit}>
         <input type="hidden" name="bundle_id" value={cardLists.id} />
-        <p><b>image:</b><input name="image" type="text" /></p>
-        <p><b>Q:</b><input name="question" type="text" /></p>
-        <p><b>A:</b><input name="answer" type="text" /></p>
+        <p><b>Image:</b><input name="image" type="text" /></p>
+        <p><b>Question:</b><input name="question" type="text" /></p>
+        <p><b>Answer:</b><input name="answer" type="text" /></p>
         <button type="submit">New</button>
       </form>
-
       {cardLists.cards && cardLists.cards.map(card => (
-        <div key={card.id}>
-          {card.question && <p> <b>Q:</b>{card.question}</p>}
-          {card.image && <p><img src={card.image} width="200" /></p>}
-          <b>A:</b>{card.answer}
-          <Modal show={isCardShowVisible && currentCard.id === card.id} onClose={handleClose}>
-            <form onSubmit={(event) => updateSubmit(event, card)}>
-              <p>Q: <input defaultValue={card.question} name="question" type="text" /></p>
-              <p>url: <input defaultValue={card.image} name="image" type="text" /></p>
-              <p>A: <input defaultValue={card.answer} name="answer" type="text" /></p>
-              <button type="submit">Update</button>
-            </form>
-            <button onClick={() => destroyCard(card)}>Delete</button>
-          </Modal>
-          <button onClick={() => handleShowCard(card)}>Uptate</button>
-          <hr />
+
+        <div className="card-show">
+          <div key={card.id} className="card-info">
+            {card.question && <p> <b>Q:</b>{card.question}</p>}
+            {card.image && <p><img src={card.image} width="200" /></p>}
+            <b>A:</b>{card.answer}
+            <Modal show={isCardShowVisible && currentCard.id === card.id} onClose={handleClose}>
+              <form onSubmit={(event) => updateSubmit(event, card)}>
+                <p>Q: <input defaultValue={card.question} name="question" type="text" /></p>
+                <p>url: <input defaultValue={card.image} name="image" type="text" /></p>
+                <p>A: <input defaultValue={card.answer} name="answer" type="text" /></p>
+                <button type="submit">Update</button>
+
+              </form>
+              <button onClick={() => destroyCard(card)}>Delete</button>
+            </Modal>
+          </div>
+
+          <div className="modal-button">
+            <button onClick={() => handleShowCard(card)}>Uptate</button>
+          </div>
+
         </div>
+
       ))}
     </div>
   )

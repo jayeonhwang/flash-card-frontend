@@ -82,15 +82,16 @@ export function Quiz() {
         </div>
       ) : (
         <div className="result">
-          <h3>Result</h3>
-          <p>
-            Total Question: {cards.length}
-          </p>
-          <p>
-            Correct Answers:<span> {correctCount}</span>
-          </p>
-          <p>Percentage: {percentage.toFixed(2)}%</p>
-
+          <div className="result-page">
+            <h3>Result</h3>
+            <p>
+              Total Question: {cards.length}
+            </p>
+            <p>
+              Correct Answers:<span> {correctCount}</span>
+            </p>
+            <p>Percentage: {percentage.toFixed(2)}%</p>
+          </div>
         </div>
 
       )}

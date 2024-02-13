@@ -1,5 +1,8 @@
 body {
-  margin: 0;
+  margin: 0 auto;
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
 }
 
 .body {
@@ -35,7 +38,7 @@ html {
 }
 
 header {
-  width: 100vw;
+  width: 100%;
   background-color: #1e8bc3;
   height: 70px;
 }
@@ -317,5 +320,75 @@ footer {
 /* user-pages */
 
 .my-page {
-  width: 100vw;
+  width: 90vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+}
+
+.bundle-new,
+.create-card {
+  border: 1px solid #1e8bc3;
+  border-radius: 0.4rem;
+  padding: 8px 12px;
+}
+
+.bundle-new input,
+.create-card input {
+  width: 96%;
+  margin-bottom: 20px;
+}
+
+.bundle-new button,
+.create-card button {
+  background-color: #89c4f4;
+  border: none;
+  border-radius: 0.4rem;
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+}
+
+.my-page ul {
+  list-style: none;
+}
+
+.card-edit-box {
+  width: 95vw;
+  padding: 8px 12px;
+}
+
+.modal-button button,
+.bundle-show button {
+  margin-top: 10px;
+  background-color: #89c4f4;
+  border: none;
+  border-radius: 0.4rem;
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+}
+
+
+.card-show,
+.bundle-show {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  border-bottom: 2px solid #89c4f4;
+  padding: 8px 12px;
+}
+
+
+
+.result-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 75vw;
+  height: 60vh;
+  border: 1px solid #1e8bc3;
+  font-size: large;
+  margin-top: 50px;
 }

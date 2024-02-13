@@ -6,7 +6,7 @@ export function Header() {
   if (localStorage.jwt) {
     loggedInStatus = (
       <ul>
-        <li><a href="/my">MY Page</a></li>
+        <li><a href="/my">My Page</a></li>
         <li><LogoutLink /></li>
       </ul>
     )
@@ -22,7 +22,7 @@ export function Header() {
     <header>
       <nav className="nav">
         <div className="home">
-          <span className="icon">&#x1F4D3;</span>
+          <span className="icon" style={{ fontSize: '1.3em' }}>&#x1F4D3;</span>
           <a href="/"> FlashCards</a>
         </div>
         <div className="logstatus">

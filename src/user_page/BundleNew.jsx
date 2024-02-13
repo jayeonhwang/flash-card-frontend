@@ -7,7 +7,7 @@ export function BundleNew(props) {
     props.onCreateBundle(params, () => event.target.reset())
   }
   return (
-    <div>
+    <div className="bundle-new">
       <h2>Create Bundle</h2>
 
       <form onSubmit={handleSubmit}>
