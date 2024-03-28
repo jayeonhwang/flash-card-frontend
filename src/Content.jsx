@@ -6,7 +6,7 @@ import { Signup } from "./authentication/Signup";
 import { Login } from "./authentication/Login";
 import { MyPage } from "./user_page/MyPage";
 import { CardEdit } from "./user_page/CardEdit";
-import { Quiz } from "./Quiz/Quiz";
+import { Quiz } from "./quiz/Quiz";
 import { MultipleChoice } from "./quiz/MultipleChoice";
 
 
