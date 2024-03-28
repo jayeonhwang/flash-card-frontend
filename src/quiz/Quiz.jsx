@@ -54,7 +54,7 @@ export function Quiz() {
   }
 
   const { cards } = questions;
-  const { question, image, answer } = cards[activeQuestion];
+  const { question, image } = cards[activeQuestion];
   const percentage = (correctCount / cards.length) * 100;
 
 

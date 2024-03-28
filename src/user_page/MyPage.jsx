@@ -68,7 +68,7 @@ export function MyPage() {
 
   return (
     <div className="my-page">
-      <h2>My Bundles</h2>
+      <h2>My Cards</h2>
       <BundleNew onCreateBundle={handleCreateBundle} />
       <ul>
         {bundles.map(bundle => (
@@ -78,7 +78,9 @@ export function MyPage() {
               <Modal show={isBundleShowVisible && currentBundle.id === bundle.id} onClose={handleClose}>
                 <form onSubmit={(event) => handleSubmit(event, bundle)}>
                   Change Title: <input defaultValue={bundle.title} name="title" type="text" />
-                  <button type="submit">Update Title</button>
+                  <p>
+                    <button type="submit">Update Title</button>
+                  </p>
                 </form>
                 <button onClick={() => handleDestroyBundle(bundle)}>Delete</button>
               </Modal>

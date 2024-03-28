@@ -81,7 +81,7 @@ export function MultipleChoice() {
   }
 
   const { cards } = questions;
-  const { question, image } = cards[activeQuestion];
+  const { question, image } = cards[activeQuestion]
   const percentage = (correctCount / cards.length) * 100;
 
 

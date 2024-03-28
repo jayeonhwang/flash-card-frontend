@@ -299,6 +299,10 @@ footer {
   font-weight: bold;
 }
 
+.next-button:hover {
+  background-color: #1e8bc3;
+}
+
 .signup-box input {
   width: 100%;
   margin-bottom: 5px;

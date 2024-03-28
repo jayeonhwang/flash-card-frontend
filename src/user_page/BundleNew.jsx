@@ -8,10 +8,10 @@ export function BundleNew(props) {
   }
   return (
     <div className="bundle-new">
-      <h2>Create Bundle</h2>
+      <h2>New</h2>
 
       <form onSubmit={handleSubmit}>
-        <div>Title: <input name="title" type="string" /></div>
+        <div>Topic: <input name="title" type="string" /></div>
         <button type="submit">Create Bundle</button>
       </form>
 
