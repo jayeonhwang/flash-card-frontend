@@ -11,7 +11,7 @@ export function MyPage() {
   const [currentBundle, setCurrentBundle] = useState({})
 
   const getBundles = () => {
-    axios.get("http://localhost:3000/mybundles.json").then(response => {
+    axios.get("/mybundles.json").then(response => {
       console.log(response.data)
       setBundles(response.data)
     })
@@ -19,7 +19,7 @@ export function MyPage() {
 
   const handleCreateBundle = (params, successCallback) => {
     console.log("handleCreateBundle", params)
-    axios.post("http://localhost:3000/bundles.json", params).then(response => {
+    axios.post("/bundles.json", params).then(response => {
       setBundles([...bundles, response.data])
       successCallback()
     })
@@ -27,7 +27,7 @@ export function MyPage() {
 
   const handleDestroyBundle = (bundle) => {
     console.log("handleDestroyBundle", bundle);
-    axios.delete(`http://localhost:3000/bundles/${bundle.id}.json`).then(response => {
+    axios.delete(`/bundles/${bundle.id}.json`).then(response => {
       setBundles(bundles.filter((b) => b.id !== bundle.id))
     })
   }
@@ -43,7 +43,7 @@ export function MyPage() {
 
   const handleUpdateBundle = (id, params, successCallBack) => {
     console.log("handleUpdateBundle", params);
-    axios.patch(`http://localhost:3000/bundles/${id}.json`, params).then(response => {
+    axios.patch(`/bundles/${id}.json`, params).then(response => {
       setBundles(
         bundles.map(bundle => {
           if (bundle.id === response.data.id) {

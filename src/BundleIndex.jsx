@@ -7,7 +7,7 @@ export function BundleIndex() {
   const [searchTerm, setSearchTerm] = useState("")
 
   const getBundles = () => {
-    axios.get("http://localhost:3000/bundles.json").then(response => {
+    axios.get("/bundles.json").then(response => {
       console.log(response.data)
       setBundles(response.data)
     })

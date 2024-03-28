@@ -13,7 +13,7 @@ export function CardList() {
   const [cardLists, setCardLists] = useState([])
 
   const getCardList = () => {
-    axios.get(`http://localhost:3000/bundles/${id}.json`).then(response => {
+    axios.get(`/bundles/${id}.json`).then(response => {
       console.log(response.data)
       setCardLists(response.data)
     })

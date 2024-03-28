@@ -15,7 +15,7 @@ export function Quiz() {
 
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/bundles/${id}.json`)
+    axios.get(`/bundles/${id}.json`)
       .then(response => {
         console.log(response.data);
         setQuestions(response.data);

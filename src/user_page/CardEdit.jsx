@@ -13,7 +13,7 @@ export function CardEdit() {
   const [currentCard, setCurrentCard] = useState({})
 
   const getCardList = () => {
-    axios.get(`http://localhost:3000/bundles/${id}.json`).then(response => {
+    axios.get(`/bundles/${id}.json`).then(response => {
       console.log(response.data)
       setCardLists(response.data)
     })
@@ -22,7 +22,7 @@ export function CardEdit() {
   useEffect(getCardList, [id]);
 
   const createCard = (params, successCallback) => {
-    axios.post("http://localhost:3000/cards.json", params).then(response => {
+    axios.post("/cards.json", params).then(response => {
       setCards([...cards, response.data]);
       successCallback();
       getCardList();
@@ -36,7 +36,7 @@ export function CardEdit() {
   };
 
   const destroyCard = (card) => {
-    axios.delete(`http://localhost:3000/cards/${card.id}.json`).then(response => {
+    axios.delete(`/cards/${card.id}.json`).then(response => {
       setCards(cards.filter((c) => c.id !== card.id))
       getCardList();
     })
@@ -52,7 +52,7 @@ export function CardEdit() {
   }
 
   const handleUpdateCard = (id, params, successCallback) => {
-    axios.patch(`http://localhost:3000/cards/${id}.json`, params).then(response => {
+    axios.patch(`/cards/${id}.json`, params).then(response => {
       setCards(
         cards.map(card => {
           if (card.id === response.data.id) {
